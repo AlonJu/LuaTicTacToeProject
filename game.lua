@@ -105,7 +105,7 @@ isRunning= true
 
 while (isRunning == true) do
 print ("Do you want to play? Y/N")
-answer = io.read("*n")
+answer = io.read("*l")
 
     if (string.lower(answer) =="y") then
         while(checkAll(nil,table) == false) do
