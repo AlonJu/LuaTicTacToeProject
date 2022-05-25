@@ -102,34 +102,78 @@ function DisplayTable(table)
     end
 end
 
-
-
-function tictactoe()
-isRunning= true
-
-while (isRunning == true) do
-print ("Do you want to play? Y/N")
-answer = io.read("*l")
-
-    if (string.lower(answer) =="y") then
-        while(checkAll(nil,table) == false) do
-        
-
-        end
-    
-    else if (string.lower(answer)=="n") then
-        isRunning = false
-    
-        
+function AIorPI(isEnabled, table, term)
+    if (isEnabled == true) then
+        table[math.random(#table)][math.random(#table)] = term
     else
-        print("try again")
+        print("Choose your position")
+        x = io.read("*n")
+        y = io.read("*n")
+            if(table[x][y]~=nil) then
+                print("Location is occupied, try again")
+            else if ((x>#table or x<1) and (y>#table or y<1)) then
+                print("Location is less or above the current dimensions of the board, try again")
+            else
+                table[x][y]=term
+            end
+        end
     end
+end    
+
+function checkWin(table, term)
+    if (checkColumn(term,table) or checkRow(term,table) or checkDiagonal(term, table) or checkRDiagonal(term,table)) then
+        print (term.." wins!")
+    
+    end
+end
+
+
+--game logic
+function tictactoeSettings(table)
+isRunning = true
+aiEnabled = false
+P1term =1
+P2term =0
+    while (isRunning == true) do
+        print ("Do you want to play? Y/N")
+        answer = io.read("*l")
+
+        if (string.lower(answer) =="y") then
+            --Modes
+            print("Mode Select:")
+            print("1. P1 vs P2")
+            print("2. P1 vs COM")
+            mode = io.read("*n")
+            if (mode == 1) then
+                aiEnabled = false
+                while (isRunning ==true) do
+                    AIorPI(aiEnabled, table, P1Term)
+                    AIorPI(aiEnabled, table, P2Term)
+                    end
+            else if (mode ==2) then
+                aiEnabled =true
+                while(isRunning ==true) do
+                    AIorPI(aiEnabled, table, P1Term)
+                    AIorPI(aiEnabled, table, P2Term)
+                    end
+            else
+                print("Please Re-enter the proper values")
+            end
+            
+        end
+        else if (string.lower(answer)=="n") then
+            isRunning = false
+        else
+            print("try again")
+        
+        end
     end
 
 end
 
 end
-print(DisplayTable(row))
+
+tictactoe(board)
 --tictactoe()
 
 --print(checkDiagonal(1, board))
