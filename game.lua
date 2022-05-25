@@ -104,33 +104,36 @@ end
 
 function AIorPI(isEnabled, table, term)
     if (isEnabled == true) then
-        table[math.random(#table)][math.random(#table)] = term
     else
         print("Choose your position")
         x = io.read("*n")
         y = io.read("*n")
-            if(table[x][y]~=nil) then
-                print("Location is occupied, try again")
-            else if ((x>#table or x<1) and (y>#table or y<1)) then
-                print("Location is less or above the current dimensions of the board, try again")
-            else
-                table[x][y]=term
-            end
+        if(table[x][y]~=nil) then
+            print("Location is occupied, try again")
+        else if ((x>#table or x<1) and (y>#table or y<1)) then
+            print("Location is less or above the current dimensions of the board, try again")
+        else
+            table[x][y]=term
         end
     end
-end    
+end
 
 function checkWin(table, term)
+    table[math.random(#table)][math.random(#table)] = term
+    end    
+
     if (checkColumn(term,table) or checkRow(term,table) or checkDiagonal(term, table) or checkRDiagonal(term,table)) then
         print (term.." wins!")
-        return true
-    end
-    return false
+    return true
 end
+return false
+end
+
 
 
 --game logic
 function tictactoeSettings(table)
+    
 isRunning = true
 aiEnabled = false
 P1term =1
@@ -147,13 +150,13 @@ P2term =0
             mode = io.read("*n")
             if (mode == 1) then
                 aiEnabled = false
-                while (isRunning ==true) do
+                for i=1, #table,1 do
                     AIorPI(aiEnabled, table, P1Term)
                     AIorPI(aiEnabled, table, P2Term)
                     end
             else if (mode ==2) then
                 aiEnabled =true
-                while(isRunning ==true) do
+                for i=1, #table,1 do
                     AIorPI(aiEnabled, table, P1Term)
                     AIorPI(aiEnabled, table, P2Term)
                     
@@ -175,7 +178,7 @@ end
 
 end
 
-tictactoe(board)
+tictactoeSettings(empty_board)
 --tictactoe()
 
 --print(checkDiagonal(1, board))
