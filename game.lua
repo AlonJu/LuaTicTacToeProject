@@ -123,8 +123,9 @@ end
 function checkWin(table, term)
     if (checkColumn(term,table) or checkRow(term,table) or checkDiagonal(term, table) or checkRDiagonal(term,table)) then
         print (term.." wins!")
-    
+        return true
     end
+    return false
 end
 
 
@@ -155,7 +156,8 @@ P2term =0
                 while(isRunning ==true) do
                     AIorPI(aiEnabled, table, P1Term)
                     AIorPI(aiEnabled, table, P2Term)
-                    end
+                    
+                end
             else
                 print("Please Re-enter the proper values")
             end
