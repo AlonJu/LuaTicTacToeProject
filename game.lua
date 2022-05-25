@@ -104,6 +104,7 @@ end
 
 function AIorPI(isEnabled, table, term)
     if (isEnabled == true) then
+         table[math.random(#table)][math.random(#table)] = term
     else
         print("Choose your position")
         x = io.read("*n")
@@ -117,16 +118,15 @@ function AIorPI(isEnabled, table, term)
         end
     end
 end
+end
 
 function checkWin(table, term)
-    table[math.random(#table)][math.random(#table)] = term
-    end    
-
     if (checkColumn(term,table) or checkRow(term,table) or checkDiagonal(term, table) or checkRDiagonal(term,table)) then
         print (term.." wins!")
-    return true
-end
-return false
+    else
+        print("Continue on...")
+    end
+
 end
 
 
@@ -152,14 +152,18 @@ P2term =0
                 aiEnabled = false
                 for i=1, #table,1 do
                     AIorPI(aiEnabled, table, P1Term)
+                    checkWin(table,P1Term)
                     AIorPI(aiEnabled, table, P2Term)
-                    end
+                    checkWin(table,P2Term)
+                end
+                
             else if (mode ==2) then
                 aiEnabled =true
                 for i=1, #table,1 do
                     AIorPI(aiEnabled, table, P1Term)
+                    checkWin(table,P1Term)
                     AIorPI(aiEnabled, table, P2Term)
-                    
+                    checkWin(table,P2Term)
                 end
             else
                 print("Please Re-enter the proper values")
