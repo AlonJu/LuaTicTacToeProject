@@ -109,15 +109,15 @@ function AIorPI(isEnabled, table, term)
         print("Choose your position")
         x = io.read("*n")
         y = io.read("*n")
-        if(table[x][y]~=nil) then
-            print("Location is occupied, try again")
-        else if ((x>#table or x<1) and (y>#table or y<1)) then
-            print("Location is less or above the current dimensions of the board, try again")
-        else
-            table[x][y]=term
+            if(table[x][y]~=nil) then
+                print("Location is occupied, try again")
+            else if ((x>#table or x<1) and (y>#table or y<1)) then
+                print("Location is less or above the current dimensions of the board, try again")
+            else
+                table[x][y]=term
+            end
         end
     end
-end
 end
 
 function checkWin(table, term)
